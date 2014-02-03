@@ -1,0 +1,11 @@
+{
+    "name": "little-prince",
+    "version": "0.0.1",
+    "private": true,
+    "devDependencies": {
+        "gulp": "~3.5.1",
+        "gulp-browserify": "~0.4.2",
+        "gulp-util": "~2.2.14",
+        "gulp-clean": "~0.2.4"
+    }
+}
