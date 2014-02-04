@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'lp_Title';
+    src: url('../font/RetroElectro.ttf');
+}
+
+@font-face {
+    font-family: 'lp_Body';
+    src: url('../font/NoBulliesAllowed.ttf');
+}
+
+body {
+    margin:0;
+    padding:0;
+    background:#000;
+    overflow:hidden;
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+}
