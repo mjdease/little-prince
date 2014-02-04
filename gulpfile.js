@@ -4,7 +4,8 @@ var clean = require('gulp-clean');
 var browserify = require("gulp-browserify");
 
 var paths = {
-    scripts : ["./js/app.js"],
+    appEntry : "./js/app.js",
+    scripts : ["./js/**/*.js"],
     styles : ["./css/**/*.css"],
     images : ["./img/**/*"]
 };
@@ -15,8 +16,10 @@ gulp.task("default", ["scripts", "styles", "images", "watch"], function(){
 });
 
 gulp.task("scripts", function(){
-    gulp.src(paths.scripts)
-        .pipe(browserify())
+    gulp.src(paths.appEntry)
+        .pipe(browserify({
+            debug : true
+        }))
         .pipe(gulp.dest("./build/js"));
 });
 
