@@ -1,22 +1,25 @@
 var gulp = require("gulp");
 var gutil = require("gulp-util");
 var clean = require('gulp-clean');
+var plumber = require('gulp-plumber');
 var browserify = require("gulp-browserify");
 
 var paths = {
     appEntry : "./js/app.js",
     scripts : ["./js/**/*.js"],
     styles : ["./css/**/*.css"],
-    images : ["./img/**/*"]
+    images : ["./img/**/*"],
+    fonts : ["./font/*"]
 };
 
-gulp.task("default", ["scripts", "styles", "images", "watch"], function(){
+gulp.task("default", ["scripts", "styles", "images", "fonts", "watch"], function(){
     gulp.src("./index.html")
         .pipe(gulp.dest("./build"));
 });
 
 gulp.task("scripts", function(){
     gulp.src(paths.appEntry)
+        .pipe(plumber())
         .pipe(browserify({
             debug : true
         }))
@@ -33,8 +36,14 @@ gulp.task("images", function(){
         .pipe(gulp.dest("./build/img"));
 });
 
+gulp.task("fonts", function(){
+    gulp.src(paths.fonts)
+        .pipe(gulp.dest("./build/font"));
+});
+
 gulp.task("watch", function () {
     gulp.watch(paths.scripts, ["scripts"]);
     gulp.watch(paths.styles, ["styles"]);
     gulp.watch(paths.images, ["images"]);
+    gulp.watch(paths.fonts, ["fonts"]);
 });
