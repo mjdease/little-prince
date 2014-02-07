@@ -1,5 +1,6 @@
 var Kinetic = require("./lib/kinetic");
 var Promise = require("promise");
+var _ = require("lodash");
 
 exports.map = function(value, low1, high1, low2, high2) {
     return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
@@ -36,6 +37,46 @@ exports.loadImages = function(imageList){
             })(imageList[i]);
         }
     });
+};
+
+//optons - all sprite options except for animations
+//width - frame width
+//height - frame height
+//animList - Array of objects where the object keys are the names of the animations
+//          and the value is the number of frames.
+//          eg: [{idle:1}, {run: 14}, {walk: 14}]
+ exports.defineSprite = function(options, width, height, animList){
+    var anim = {}, index = 0;
+    if(_.isArray(animList)){
+        for(var i = 0; i < animList.length; i++){
+            var animation = animList[i];
+            var animName = Object.getOwnPropertyNames(animation)[0];
+            anim[animName] = [];
+            for(var j = 0; j < animList[animName]; j++){
+                anim[animName].push(j * width);
+                anim[animName].push(index * height);
+                anim[animName].push(width);
+                anim[animName].push(height);
+            }
+            index++;
+        }
+    }
+    // old buggy code, left in for compatibility
+    else{
+        for(var name in animList){
+            anim[name] = [];
+            for(var j = 0; j < animList[name]; j++){
+                anim[name].push(j * width);
+                anim[name].push(index * height);
+                anim[name].push(width);
+                anim[name].push(height);
+            }
+            index++;
+        }
+    }
+
+    options.animations = anim;
+    return new Kinetic.Sprite(options);
 };
 
 // Add jquery-style visibility toggle function to Kinetic nodes
