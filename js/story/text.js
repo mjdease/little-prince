@@ -139,7 +139,7 @@ function getStoryText(text, x){
         text : text,
         x : x,
         y : 28,
-        width : 390,
+        width : 380 * window.devicePixelRatio,
         fontFamily: "lp_Body",
         fontSize: 24,
         fill: "black",
