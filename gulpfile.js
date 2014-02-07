@@ -9,10 +9,11 @@ var paths = {
     scripts : ["./js/**/*.js"],
     styles : ["./css/**/*.css"],
     images : ["./img/**/*"],
-    fonts : ["./font/*"]
+    fonts : ["./font/*"],
+    sounds : ["./audio/**/*"]
 };
 
-gulp.task("default", ["scripts", "styles", "images", "fonts", "watch"], function(){
+gulp.task("default", ["scripts", "styles", "images", "fonts", "sounds", "watch"], function(){
     gulp.src("./index.html")
         .pipe(gulp.dest("./build"));
 });
@@ -41,9 +42,15 @@ gulp.task("fonts", function(){
         .pipe(gulp.dest("./build/font"));
 });
 
+gulp.task("sounds", function(){
+    gulp.src(paths.sounds)
+        .pipe(gulp.dest("./build/audio"));
+});
+
 gulp.task("watch", function () {
     gulp.watch(paths.scripts, ["scripts"]);
     gulp.watch(paths.styles, ["styles"]);
     gulp.watch(paths.images, ["images"]);
     gulp.watch(paths.fonts, ["fonts"]);
+    gulp.watch(paths.sounds, ["sounds"]);
 });
