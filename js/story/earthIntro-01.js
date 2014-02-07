@@ -21,9 +21,9 @@ var landingSpeedTolerance = 25;
 var maxSpeed = 302;
 var stallSpeed = 87;
 var angle = 0;
-var angleChangeRate = Math.PI/512;
-var angleLimit = Math.PI / 4;
-var angleLandingTolerance = Math.PI / 16;
+var angleChangeRate = 180/512;
+var angleLimit = 180/ 4;
+var angleLandingTolerance = 180/ 16;
 
 // asset layout
 var duneStart = -200;
@@ -148,10 +148,10 @@ page.update = function(frame, stage, layers){
         }
     }
 
-    var dispX = speed * Math.cos(angle) * frame.timeDiff / 1000;
-    var dispY = speed * Math.sin(angle) * frame.timeDiff / 1000;
+    var dispX = speed * Math.cos(angle * Math.PI / 180) * frame.timeDiff / 1000;
+    var dispY = speed * Math.sin(angle * Math.PI / 180) * frame.timeDiff / 1000;
 
-    assets.plane.setRotation(angle);
+    assets.plane.rotation(angle);
     if(pageState != page.States.PASSED){
         assets.plane.move({x:0, y:dispY});
     }
@@ -229,7 +229,7 @@ function updateVelocity(){
         if(angle < -angleLimit) angle = -angleLimit;
         if(angle > angleLimit) angle = angleLimit;
         ui.angleIndicator.setY(getAngleMeterStatus());
-        ui.angleLabel.setText(Math.round(angle * -180 / Math.PI) + "°");
+        ui.angleLabel.setText(Math.round(angle * -1) + "°");
         ui.throttleIndicator.setY(getSpeedMeterStatus());
         ui.throttleLabel.setText(Math.round(speed / 0.621) + "km/h");
     }
@@ -344,7 +344,7 @@ function initializeUi(){
         width:10,
         height:10,
         offset: {x:5,y:5},
-        rotation : Math.PI/4,
+        rotation : 180/4,
         fill:"black"
     });
     var btnUp = new Kinetic.Image({
