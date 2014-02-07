@@ -52,7 +52,7 @@ exports.loadImages = function(imageList){
             var animation = animList[i];
             var animName = Object.getOwnPropertyNames(animation)[0];
             anim[animName] = [];
-            for(var j = 0; j < animList[animName]; j++){
+            for(var j = 0; j < animation[animName]; j++){
                 anim[animName].push(j * width);
                 anim[animName].push(index * height);
                 anim[animName].push(width);
@@ -74,7 +74,6 @@ exports.loadImages = function(imageList){
             index++;
         }
     }
-
     options.animations = anim;
     return new Kinetic.Sprite(options);
 };
