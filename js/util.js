@@ -86,6 +86,17 @@ exports.playWhileTouched = function(node){
     });
 };
 
+exports.addToStage = function(layer, objs){
+    if(_.isArray(objs)){
+        for(var i = 0; i < objs.length; i++){
+            layer.add(objs[i]);
+        }
+    }
+    else{
+        layer.add(objs);
+    }
+};
+
 // Add jquery-style visibility toggle function to Kinetic nodes
 Kinetic.Util.addMethods(Kinetic.Image, {
     toggle : function(visible){
