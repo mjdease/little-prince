@@ -22,11 +22,7 @@ page.initPage = function(images, stage, layers){
 };
 
 page.startPage = function(){
-    narrator.on('mousedown touchstart', function(e) {
-        e.targetNode.start();
-    }).on('mouseup touchend', function(e) {
-        e.targetNode.stop();
-    });
+    util.playWhileTouched(narrator);
 };
 
 module.exports = page;
