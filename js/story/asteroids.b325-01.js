@@ -50,6 +50,8 @@ page.setChallengeText("entrap", 863, 288);
 
 page.setNextPage("menu", 1);
 
+page.setMusic("audio/music/maze.mp3");
+
 page.setRequiredAssets([
     {name: "prince", file: "prince.png"},
     {name: "rat", file: "rat.png"},

@@ -19,6 +19,8 @@ page.setNextPage("menu", 1);
 
 page.setChallengeText("coordinated", 785, 403);
 
+page.setMusic("audio/music/lamp.mp3");
+
 page.setRequiredAssets([
     {name: "planet", file: "planet.png"},
     {name: "lamp", file: "lamp.png"}

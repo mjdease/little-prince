@@ -5,6 +5,8 @@ var prince, narrator;
 
 var page = new Page("earthIntro", 0, false);
 
+page.setNarration("audio/narration/earthIntro0.mp3");
+
 page.setRequiredAssets([
     {name: "narrator", file: "narrator.png"},
     {name: "prince", file: "prince.png"}

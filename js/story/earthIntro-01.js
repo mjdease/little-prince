@@ -47,6 +47,8 @@ var page = new Page("earthIntro", 1, false);
 
 page.setChallengeText("manoeuvre", 683, 57);
 
+page.setMusic("audio/music/plane.mp3");
+
 page.setRequiredAssets([
     {name: "plane", file: "plane.png"},
     {name: "dunes", file: "dunes.png"},

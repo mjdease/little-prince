@@ -19,6 +19,8 @@ var endCheckThreshold = 400;
 
 var page = new Page("asteroids.b612", 0, false);
 
+page.setMusic("audio/music/weeding.mp3");
+
 page.setChallengeText("weeding", 702, 287);
 
 page.setRequiredAssets([
