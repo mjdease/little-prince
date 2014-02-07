@@ -61,6 +61,7 @@ Page.prototype.setChallengeText = function(text, x, y, color){
         strokeWidth:1
     });
     this.hasChallenge = true;
+    this.requiredImages.push({name:"hint", path:getImagePath("hint.png", this.section, this.num, this.asteroidId)});
 };
 
 Page.prototype.getState = function(){
@@ -89,7 +90,6 @@ Page.prototype.setMusic = function(path){
 
 // arguments in array of objects containing name and asset path
 Page.prototype.setRequiredAssets = function(list){
-    list.push({name : "background", file : "background.jpg"});
     for(var i = 0; i < list.length; i++){
         var img = list[i];
         if(img.file){

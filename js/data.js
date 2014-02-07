@@ -29,18 +29,17 @@ exports.audio = function(type, value){
 
 exports.challenges = function(id, value){
     if(value !== undefined){
-        saved.chalenges[id] = value;
+        saved.challenges[id] = value;
         exports.saveGame();
     }
     else{
-        return saved.chalenges[id];
+        return saved.challenges[id];
     }
 };
 
 exports.asteroids = function(id, value){
     if(value !== undefined){
         saved.asteroids[id] = value;
-        console.log(saved.asteroids[id]);
         exports.saveGame();
     }
     else{
