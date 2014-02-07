@@ -274,7 +274,7 @@ function closeSettings(){
 function updateButtonVisibility(){
     var challengeDone = true;
     if(currentPage.hasChallenge){
-        challengeDone = data.challenges(currentPage.id);
+        challengeDone = !!data.challenges(currentPage.id);
     }
 
     ui.nav.home.toggle(currentPage.id != "menu0");
