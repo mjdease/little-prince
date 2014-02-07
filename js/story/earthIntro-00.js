@@ -18,7 +18,7 @@ page.initPage = function(images, stage, layers){
         image: images.prince,
         animation: "idle",
         frameRate: 14
-    }, 119, 236, {idle: 3});
+    }, 119, 236, [{idle: 3}]);
 
     narrator = util.defineSprite({
         x:100,
@@ -26,7 +26,7 @@ page.initPage = function(images, stage, layers){
         image: images.narrator,
         animation: "idle",
         frameRate: 14
-    }, 758, 710, {idle: 4});
+    }, 758, 710, [{idle: 4}]);
 
     layers.dynBack.add(prince).add(narrator);
 };
