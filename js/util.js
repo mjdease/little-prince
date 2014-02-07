@@ -78,6 +78,14 @@ exports.loadImages = function(imageList){
     return new Kinetic.Sprite(options);
 };
 
+exports.playWhileTouched = function(node){
+    node.on('mousedown touchstart', function(e) {
+        e.targetNode.start();
+    }).on('mouseup touchend', function(e) {
+        e.targetNode.stop();
+    });
+};
+
 // Add jquery-style visibility toggle function to Kinetic nodes
 Kinetic.Util.addMethods(Kinetic.Image, {
     toggle : function(visible){
