@@ -1,4 +1,9 @@
+var Kinetic = require("./lib/kinetic");
 var Promise = require("promise");
+
+exports.map = function(value, low1, high1, low2, high2) {
+    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+};
 
 // imageList - array of objects containing name and path
 //          eg: [{name: "test", path: "assets/images/testimg.png"},
@@ -8,6 +13,10 @@ exports.loadImages = function(imageList){
         var numImages = imageList.length,
             images = {},
             numComplete = 0;
+
+        if(!imageList){
+            resolve();
+        }
 
         for(var i = 0; i < numImages; i++){
             (function(obj){
@@ -27,4 +36,15 @@ exports.loadImages = function(imageList){
             })(imageList[i]);
         }
     });
-}
+};
+
+// Add jquery-style visibility toggle function to Kinetic nodes
+Kinetic.Util.addMethods(Kinetic.Image, {
+    toggle : function(visible){
+        if(typeof visible !== "undefined"){
+            this.setVisible(!!visible);        }
+        else{
+            this.setVisible(!this.getVisible());
+        }
+    }
+});
