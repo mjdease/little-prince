@@ -6,5 +6,5 @@ var story = require("./story");
 var book = require("./book");
 
 document.addEventListener("DOMContentLoaded", function(){
-    book.init(story);
+    book.init(story, "menu0");
 });
