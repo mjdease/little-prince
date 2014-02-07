@@ -146,7 +146,6 @@ exports.getScale = function(){
 };
 
 exports.getAsteroidProgress = function(){
-    console.log(data.get("asteroids"));
     return data.get("asteroids");
 };
 
