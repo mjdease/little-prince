@@ -135,7 +135,6 @@ exports.pageComplete = function(){
         data.challenges(currentPage.id, true);
     }
     if(currentPage.asteroidId && currentPage.nextPage === "menu1"){
-        console.log("!ast");
         data.asteroids(currentPage.asteroidId, true);
     }
     updateButtonVisibility();
@@ -205,7 +204,44 @@ function initPage(){
 
         if(currentPage.hasChallenge && images["hint"]){
             currentPage.challengeStarted = false;
-            uiAssets.displayChallengeText(stage, layers, currentPage.challengeText, images.hint, ui.text);
+
+            var challengeText = currentPage.challengeText.clone();
+            var hint = uiAssets.createHint(images.hint);
+
+            hint.on("click", function(e){
+                e.cancelBubble = true;
+                hint.setVisible(false);
+                layers.staticFront.batchDraw();
+
+                if(!currentPage.challengeStarted){
+                    currentPage.challengeStarted = true;
+                    currentPage.startChallenge(layers);
+                    if(narration) narration.stop();
+                    if(music) music.play();
+                    ui.text.toggle(false);
+                }
+
+                stage.off("click");
+            });
+
+            challengeText.on("click", function(e){
+                e.cancelBubble = true;
+
+                if(hint.getVisible()) return;
+
+                var trigger = challengeText;
+                hint.position({x:trigger.getX() + trigger.getWidth()/2, y:trigger.getY()});
+                hint.setVisible(true);
+                layers.staticFront.batchDraw();
+
+                stage.on("click", function(){
+                    hint.setVisible(false);
+                    layers.staticFront.batchDraw();
+                    stage.off("click");
+                });
+            });
+
+            ui.text.group.add(hint).add(challengeText);
         }
 
         if(currentPage.narrationSrc){

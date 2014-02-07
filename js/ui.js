@@ -246,47 +246,10 @@ exports.createPageText = function(pageText, uiText){
     return uiText.group;
 };
 
-exports.displayChallengeText = function(stage, layers, ct, hintImg, uiText){
-    var challengeText = ct.clone();
-    var hint = new Kinetic.Image({
+exports.createHint = function(hintImg){
+    return new Kinetic.Image({
         image: hintImg,
         visible:false,
         offset : {x : hintImg.width/2, y : hintImg.height}
     });
-
-    hint.on("click", function(e){
-        e.cancelBubble = true;
-        hint.setVisible(false);
-        layers.staticFront.batchDraw();
-
-        if(!currentPage.challengeStarted){
-            currentPage.challengeStarted = true;
-            currentPage.startChallenge(layers);
-            if(narration) narration.stop();
-            if(music) music.play();
-            toggleText(false);
-        }
-
-        stage.off("click");
-    });
-
-    challengeText.on("click", function(e){
-        e.cancelBubble = true;
-
-        if(hint.getVisible()) return;
-
-        var trigger = challengeText;
-        hint.setPosition(trigger.getX() + trigger.getWidth()/2, trigger.getY());
-        hint.setVisible(true);
-        layers.staticFront.batchDraw();
-
-        stage.on("click", function(){
-            hint.setVisible(false);
-            layers.staticFront.batchDraw();
-            stage.off("click");
-        });
-    });
-
-
-    uiText.group.add(hint).add(challengeText);
-}
+};
