@@ -11,9 +11,12 @@ exports.init = function(){
         }, function(){}, {frequency:100});
     }
     else{
-        var getFakeAccelerometer = startFakeAccelerometer();
-        accWatchId =setInterval(function(){accelerometer = getFakeAccelerometer()}, 100);
+        document.addEventListener("keydown", keyboardInput);
     }
+};
+
+exports.reset = function(){
+    accelerometer = {x:0,y:0,z:0};
 };
 
 exports.get = function(){
@@ -25,29 +28,23 @@ exports.destroy = function(){
         navigator.accelerometer.clearWatch(accWatchId);
     }
     else{
-        clearInterval(accWatchId);
+        document.removeEventListener("keydown", keyboardInput);
     }
     accWatchId = null;
     accelerometer = {x:0,y:0,z:0};
 };
 
-function startFakeAccelerometer(){
-    var acc = {x:0,y:0,z:0};
-    document.addEventListener("keydown", function(e){
-        if (e.which == 37 && acc.x < 10) { // left
-            acc.y -= 0.5;
-        }
-        if (e.which == 38 && acc.y > -10) { // up
-            acc.x -= 0.5;
-        }
-        if (e.which == 39 && acc.x > -10) { // right
-            acc.y += 0.5;
-        }
-        if (e.which == 40 && acc.y < 10) { // down
-            acc.x += 0.5;
-        }
-    });
-    return function(){
-        return acc;
-    };
+function keyboardInput(e){
+    if (e.which == 37 && accelerometer.x < 10) { // left
+        accelerometer.y -= 0.5;
+    }
+    if (e.which == 38 && accelerometer.y > -10) { // up
+        accelerometer.x -= 0.5;
+    }
+    if (e.which == 39 && accelerometer.x > -10) { // right
+        accelerometer.y += 0.5;
+    }
+    if (e.which == 40 && accelerometer.y < 10) { // down
+        accelerometer.x += 0.5;
+    }
 }
