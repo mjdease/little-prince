@@ -25,8 +25,8 @@ exports.init = function(story){
     util.loadImages(menuAssets).then(function(images){
         stage = new Kinetic.Stage({
             container: "game-stage",
-            width: gameWidth,
-            height: gameHeight
+            width: global.gameWidth,
+            height: global.gameHeight
         });
 
         window.addEventListener("resize", rescaleStage);
@@ -64,8 +64,11 @@ function rescaleStage(){
     else{
         scale = window.innerWidth / global.gameWidth;
     }
+    if(scale > 1){
+        scale = 1;
+    }
     var el = document.getElementById("game-stage");
     el.style.width = global.gameWidth * scale + "px";
     el.style.height = global.gameHeight * scale + "px";
-    stage.scale(scale);
+    stage.scale({x: scale, y: scale}).draw();
 }
