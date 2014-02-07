@@ -131,7 +131,6 @@ exports.goToPage = function(id){
 };
 
 exports.pageComplete = function(){
-    console.log("complete", currentPage);
     if(currentPage.hasChallenge){
         data.challenges(currentPage.id, true);
     }
@@ -176,8 +175,6 @@ function initPage(){
     if(currentPage.id != "menu0"){
         data.set("currentPage", currentPage.id);
     }
-
-    console.log("new page - ", currentPage);
 
     // Show loading overlay if page doesn't load quickly
     setTimeout(function(){

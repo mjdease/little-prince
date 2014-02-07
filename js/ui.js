@@ -81,11 +81,11 @@ exports.init = function(saveData, stage, layers, images){
     ui.text.transitionIn = new Kinetic.Animation(function(frame){
         ui.text.position = "changing";
         var dispY = ui.text.transitionSpeed * frame.timeDiff / 1000;
-        ui.text.group.move(0, dispY);
-        if(ui.text.group.getY() > text.startY){
-            ui.text.group.setY(text.startY);
+        ui.text.group.move({x : 0, y : dispY});
+        if(ui.text.group.getY() > ui.text.startY){
+            ui.text.group.setY(ui.text.startY);
             ui.text.position = "down";
-            ui.text.toggle.setImage(text.bottomHide);
+            ui.text.showHide.setImage(ui.text.bottomHide);
             ui.text.transitionIn.stop();
             layers.staticFront.batchDraw();
         }
@@ -94,18 +94,17 @@ exports.init = function(saveData, stage, layers, images){
     ui.text.transitionOut = new Kinetic.Animation(function(frame){
         ui.text.position = "changing";
         var dispY = -1 * ui.text.transitionSpeed * frame.timeDiff / 1000;
-        ui.text.group.move(0, dispY);
+        ui.text.group.move({x : 0, y : dispY});
         if(ui.text.group.getY() < -ui.text.groupHeight){
             ui.text.group.setY(-ui.text.groupHeight);
             ui.text.position = "up";
-            ui.text.toggle.setImage(ui.text.bottomShow);
+            ui.text.showHide.setImage(ui.text.bottomShow);
             ui.text.transitionOut.stop();
             layers.staticFront.batchDraw();
         }
     }, layers.staticFront);
 
     ui.text.toggle = function(show){
-        console.log("toggle");
         if(ui.text.transitionIn.isRunning() || ui.text.transitionOut.isRunning()){
             return;
         }
