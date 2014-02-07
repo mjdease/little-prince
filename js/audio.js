@@ -67,9 +67,7 @@ exports.Sound = function(path, autoplay, loop, type){
     };
 
     this.destroy = function(){
-        console.log("before - " + sounds.length);
         sounds.splice(sounds.indexOf(this), 1);
-        console.log("after - " + sounds.length);
         this.stop();
         this.raw.unload();
     };
