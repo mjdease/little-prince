@@ -6,6 +6,24 @@ exports.map = function(value, low1, high1, low2, high2) {
     return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
 };
 
+// Distance between two kinetic objects or position objects
+exports.dist = function(obj1, obj2){
+    var pt1, pt2;
+    if(_.isNumber(obj1.x) && _.isNumber(obj1.y)){
+        pt1 = obj1;
+    }
+    else{
+        pt1 = obj1.position();
+    }
+    if(_.isNumber(obj2.x) && _.isNumber(obj2.y)){
+        pt2 = obj2;
+    }
+    else{
+        pt2 = obj2.position();
+    }
+    return Math.sqrt(Math.abs(Math.pow(pt1.x - pt2.x, 2) + Math.pow(pt1.y - pt2.y, 2)));
+};
+
 // imageList - array of objects containing name and path
 //          eg: [{name: "test", path: "assets/images/testimg.png"},
 //               {name: "test2", path: "assets/images/test2img.png"}]
